@@ -15,10 +15,15 @@ function LightPopUp() {
     return number;
 }
 
-for (let j = 0; j < 3; j++) {
-    // setInterval(() => {}, 300);
-    LightPopUp();
-}
+/*
+let s = 0;
+setInterval(() => {
+    s++;
+    if (s > 0 && s <= 3) {
+        LightPopUp();
+    } else clearInterval;
+}, 300);
+*/
 
 let keep = 0;
 let itt = 0;
