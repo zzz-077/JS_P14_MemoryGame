@@ -1,0 +1,66 @@
+/*color-link
+https://colorhunt.co/palette/07195208839535a29ff2f7a1
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --body_color: #071952;
+    --boxes_color: #088395;
+}
+body {
+    background-color: var(--body_color);
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--boxes_color);
+    padding: 1.25rem;
+    border-radius: 0.4rem;
+    text-align: center;
+    width: 400px;
+}
+.table {
+    color: white;
+    margin-bottom: 1.25rem;
+}
+.boxes_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.boxes_container .box {
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    flex-grow: 1;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.start_btn {
+    margin-top: 1rem;
+}
+.start_btn button {
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: var(--boxes_color);
+    border: 1px solid black;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.start_btn button:hover {
+    background-color: #0da6be;
+}
+.light {
+    background-color: rgba(255, 255, 255, 0.781);
+}
