@@ -1,19 +1,6 @@
 const box = document.querySelectorAll(".box");
 const table_score = document.querySelector(".table h1 span");
 const start_btn = document.querySelector(".start_btn button");
-let score = 0;
-let loose = false;
-let arr = [];
-function LightPopUp() {
-    let number = Math.floor(Math.random() * box.length);
-
-    box[number].classList.add("light");
-    setTimeout(() => {
-        box[number].classList.remove("light");
-    }, 350);
-    arr.push(number);
-    return number;
-}
 
 /*
 let s = 0;
@@ -24,42 +11,76 @@ setInterval(() => {
     } else clearInterval;
 }, 300);
 */
+/*======creating arrays =====*/
+let arrPop = [];
+let arrBx = [];
+/*======creating random number generator =====*/
+function LightPopUp() {
+    let number = Math.floor(Math.random() * box.length);
+    box[number].classList.add("light");
+    setTimeout(() => {
+        box[number].classList.remove("light");
+    }, 350);
+    arrPop.push(number);
+    console.log("arrPop" + arrPop);
+}
 
-let keep = 0;
-let itt = 0;
-let itt_fol;
-start_btn.addEventListener("click", () => {
-    /*
-    box.forEach((bx, i) => {
-        itt++;
-        itt_fol = itt;
-        for (let j = 0; j < itt; j++) {
-            LightPopUp();
-            console.log("helloo");
-        }
+/*======creating box array, where its push each click =====*/
 
-        
+let checkBoxclickFunc = function () {
+    box.forEach((bx, index) => {
         bx.addEventListener("click", () => {
-            for (let k = 0; k < arr.length; k++) {
-                if (i == arr[k]) {
-                    score++;
-                    table_score.innerHTML = score;
-                    keep++;
-                } else {
-                    keep = 0;
-                    score = 0;
-                    table_score.innerHTML = score;
-                    break;
-                }
-            }
-            if (keep > 0) {
-                LightPopUp();
-            }
-            console.log("i=" + i);
-            console.log("light=" + arr);
-            // console.log(arr);
-            itt = itt_fol;
+            BoxClick(index);
+            console.log("arrBx" + arrBx);
         });
     });
-    */
+};
+
+function BoxClick(index) {
+    arrBx.push(index);
+}
+
+/*======creating start game btn =====*/
+let firsttime = true;
+start_btn.addEventListener("click", () => {
+    if (firsttime == true) {
+        callfunction();
+        firsttime = false;
+    }
 });
+
+let k = 0;
+let check = false;
+let score = 0;
+/*======creating Compare function thats compare arrPop and arrBx =====*/
+function compare() {
+    // callfunction();
+    k = 0;
+    for (let i = 0; i < arrPop.length; i++) {
+        console.log("hello");
+        if (arrPop[i] == arrBx[i]) {
+            score++;
+            table_score.innerHTML = score;
+            console.log("EQUAL");
+            k++;
+        } else {
+            score = 0;
+            table_score.innerHTML = score;
+            console.log("NOTEQUAL");
+            check = true;
+            break;
+        }
+    }
+    if (k == arrPop.length) {
+        callfunction();
+        console.log("helllo");
+    } else if (check == true) alert("Game ended");
+}
+
+function callfunction() {
+    LightPopUp();
+    checkBoxclickFunc();
+    setInterval(() => {
+        compare();
+    }, 1000);
+}

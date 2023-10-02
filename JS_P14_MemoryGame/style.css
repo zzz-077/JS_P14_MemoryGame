@@ -35,8 +35,8 @@ body {
     gap: 20px;
 }
 .boxes_container .box {
-    border: 1px solid black;
-    border-radius: 0.2rem;
+    background-color: #0da6be;
+    border-radius: 0.6rem;
     flex-grow: 1;
     width: 100px;
     height: 100px;
@@ -45,6 +45,9 @@ body {
     align-items: center;
     cursor: pointer;
     transition: all 0.3s;
+}
+.boxes_container .box.light {
+    background-color: rgba(255, 255, 255, 0.781);
 }
 .start_btn {
     margin-top: 1rem;
@@ -60,7 +63,4 @@ body {
 }
 .start_btn button:hover {
     background-color: #0da6be;
-}
-.light {
-    background-color: rgba(255, 255, 255, 0.781);
 }
