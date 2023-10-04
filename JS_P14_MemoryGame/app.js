@@ -27,19 +27,6 @@ function LightPopUp() {
 
 /*======creating box array, where its push each click =====*/
 
-let checkBoxclickFunc = function () {
-    box.forEach((bx, index) => {
-        bx.addEventListener("click", () => {
-            BoxClick(index);
-            console.log("arrBx" + arrBx);
-        });
-    });
-};
-
-function BoxClick(index) {
-    arrBx.push(index);
-}
-
 /*======creating start game btn =====*/
 let firsttime = true;
 start_btn.addEventListener("click", () => {
@@ -50,37 +37,71 @@ start_btn.addEventListener("click", () => {
 });
 
 let k = 0;
+let lightloopend = false;
 let check = false;
 let score = 0;
+let i;
 /*======creating Compare function thats compare arrPop and arrBx =====*/
 function compare() {
-    // callfunction();
     k = 0;
-    for (let i = 0; i < arrPop.length; i++) {
-        console.log("hello");
+    for (i = 0; i < arrPop.length; i++) {
         if (arrPop[i] == arrBx[i]) {
             score++;
             table_score.innerHTML = score;
-            console.log("EQUAL");
+            // console.log("EQUAL");
             k++;
         } else {
             score = 0;
             table_score.innerHTML = score;
-            console.log("NOTEQUAL");
-            check = true;
+            // console.log("NOTEQUAL");
+            k = 0;
             break;
         }
     }
-    if (k == arrPop.length) {
-        callfunction();
-        console.log("helllo");
-    } else if (check == true) alert("Game ended");
+    if (k == arrPop.length) callfunction();
+    else alert("Game ended");
 }
 
 function callfunction() {
-    LightPopUp();
-    checkBoxclickFunc();
-    setInterval(() => {
-        compare();
-    }, 1000);
+    if (firsttime == true) {
+        LightPopUp();
+        firsttime = false;
+    } else {
+        for (i = 0; i < arrPop.length; i++) {
+            LightPopUp();
+        }
+    }
+
+    for (i = 0; i < arrPop.length; i++) {
+        function checkBoxclickFunc(ind) {
+            box.forEach((bx, index) => {
+                bx.removeEventListener("click", BoxClick);
+                bx.addEventListener("click", () => {
+                    BoxClick(index);
+                    console.log("arrBx" + arrBx + "[" + ind + "]");
+                });
+            });
+        }
+
+        function BoxClick(index) {
+            arrBx.push(index);
+        }
+
+        checkBoxclickFunc(i);
+        if (i == arrPop.length - 1) {
+            check = true;
+            console.log("thirdloop" + "[" + i + "]");
+        }
+    }
+    if (check == true) compare();
 }
+
+/*shablonia es rogor mushaobs loop shi click function yvelaze cal calke*/
+// for (let i = 0; i < 10; i++) {
+//     function test(index) {
+//         start_btn.addEventListener("click", () => {
+//             console.log("hello" + index + ":");
+//         });
+//     }
+//     test(i);
+// }
